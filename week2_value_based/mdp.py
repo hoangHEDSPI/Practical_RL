@@ -1,9 +1,9 @@
 # most of this code was politely stolen from https://github.com/berkeleydeeprlcourse/homework/
 # all creadit goes to https://github.com/abhishekunique (if i got the author right)
+from __future__ import print_function
 import sys
 import random
 import numpy as np
-
 try:
     from IPython.display import display
     from graphviz import Digraph
@@ -270,7 +270,8 @@ class FrozenLakeEnv(MDP):
     def render(self):
         desc_copy = np.copy(self.desc)
         desc_copy[self._current_state] = '*'
-        print('\n'.join(map(''.join, desc_copy)), end='\n\n')
+        print ('\n'.join(map(''.join, desc_copy)))
+        print ('\n\n')
 
 
 def plot_graph(mdp, graph_size='10,10', s_node_size='1,5',
