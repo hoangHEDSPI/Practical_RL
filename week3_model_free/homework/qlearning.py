@@ -71,7 +71,8 @@ class QLearningAgent():
     	return 0.0
 
     "*** YOUR CODE HERE ***"
-    return <compute state value>
+
+    return max(possibleActions)
     
   def getPolicy(self, state):
     """
@@ -85,9 +86,10 @@ class QLearningAgent():
     	return None
     
     best_action = None
+    possibleActions = np.asarray(possibleActions)
 
     "*** YOUR CODE HERE ***"
-    best_action = <your code>
+    best_action = np.argmax(possibleActions)
     return best_action
 
   def getAction(self, state):
@@ -114,8 +116,8 @@ class QLearningAgent():
     epsilon = self.epsilon
 
     "*** YOUR CODE HERE ***"
-    
-    return <put agent's action here>
+    action = epsilon*random.choice(possibleActions) 
+    return action
 
   def update(self, state, action, nextState, reward):
     """
@@ -131,8 +133,9 @@ class QLearningAgent():
     learning_rate = self.alpha
     
     "*** YOUR CODE HERE ***"    
-    reference_qvalue = <the "correct state value", uses reward and the value of next state>
-    
+    # reference_qvalue = <the "correct state value", uses reward and the value of next state>
+    reference_qvalue = reward + gamma*getPolicy(nextState)
+
     updated_qvalue = (1-learning_rate) * self.getQValue(state,action) + learning_rate * reference_qvalue
     self.setQValue(state,action,updated_qvalue)
 
